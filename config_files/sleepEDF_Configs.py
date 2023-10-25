@@ -7,9 +7,7 @@ class Config(object):
         self.final_out_channels = 128
 
         self.num_classes = 5
-        self.dropout = 0.35    
-        self.features_len = 127
-        self.freq_features_len = 65
+        self.dropout = 0.35
         self.data_size = 3000
         self.num_layers = 3
 

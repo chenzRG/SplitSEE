@@ -1,6 +1,5 @@
 torch==2.0.1
 sklearn
-Numpy
 Pandas
 openpyxl
 mat4py
@@ -8,3 +7,4 @@ scikit-learn
 matplotlib
 seaborn
 einops
+numpy==1.23.5

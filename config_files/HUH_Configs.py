@@ -8,8 +8,6 @@ class Config(object):
 
         self.num_classes = 2
         self.dropout = 0.35
-        self.features_len = 34 #256Hz 1sec
-        self.freq_features_len = 18 #256Hz 1sec
         self.data_size = 256
         self.num_layers = 3
 
