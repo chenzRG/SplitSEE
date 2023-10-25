@@ -4,7 +4,7 @@ class Config(object):
         self.input_channels = 1
         self.kernel_size = 25
         self.stride = 3
-        self.final_out_channels = 32
+        self.final_out_channels = 128
 
         self.num_classes = 5
         self.dropout = 0.35    
@@ -26,7 +26,7 @@ class Config(object):
         self.batch_size = 16
 
         self.Context_Cont = Context_Cont_configs()
-        self.TC = TC()
+        self.TC = TFC()
         self.augmentation = augmentations()
 
 class augmentations(object):
@@ -42,8 +42,8 @@ class Context_Cont_configs(object):
         self.use_cosine_similarity = True
 
 
-class TC(object):
+class TFC(object):
     def __init__(self):
         self.hidden_dim = 64
-        self.timesteps = 30
+        self.t_steps = 30
         self.f_steps = 15

@@ -66,25 +66,15 @@ class TCN(nn.Module):
         super(TCN, self).__init__()
         channel_sizes = [configs.final_out_channels] * configs.num_layers
         self.tcn = TemporalConvNet(configs.input_channels,  channel_sizes, kernel_size=configs.kernel_size, dropout=configs.dropout)
-        self.linear = nn.Linear(configs.final_out_channels, configs.num_classes)
 
     def forward(self, x_in):
         x = self.tcn(x_in)
-        logits = self.linear(x[:, :, -1])
-        return logits, x
+        return x
     
 class classification_model(nn.Module):
     def __init__(self, configs):
         super(classification_model, self).__init__()
-        self.logits = nn.Linear(configs.TC.hidden_dim*2, configs.num_classes)
-    def forward(self, x_in):
-        logits = self.logits(x_in)
-        return logits
-    
-class classification_tf_model(nn.Module):
-    def __init__(self, configs):
-        super(classification_tf_model, self).__init__()
-        self.logits = nn.Linear(configs.TC.hidden_dim*(configs.datasize + configs.features_len), configs.num_classes)
+        self.logits = nn.Linear(configs.TFC.hidden_dim*2, configs.num_classes)
     def forward(self, x_in):
         logits = self.logits(x_in)
         return logits

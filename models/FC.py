@@ -9,12 +9,12 @@ class FC(nn.Module):
     def __init__(self, configs, device):
         super(FC, self).__init__()
         self.num_channels = configs.final_out_channels
-        self.f_step = configs.TC.f_steps
-        self.Wk = nn.ModuleList([nn.Linear(configs.TC.hidden_dim, self.num_channels) for i in range(self.f_step)])
-        self.lsoftmax = nn.LogSoftmax()
+        self.f_step = configs.TFC.f_steps
+        self.Wk = nn.ModuleList([nn.Linear(configs.TFC.hidden_dim, self.num_channels) for i in range(self.f_step)])
+        self.lsoftmax = nn.LogSoftmax(dim=1)
         self.device = device
 
-        self.seq_transformer = Seq_Transformer(patch_size=self.num_channels, dim=configs.TC.hidden_dim, depth=4, heads=4, mlp_dim=64)
+        self.seq_transformer = Seq_Transformer(patch_size=self.num_channels, dim=configs.TFC.hidden_dim, depth=4, heads=4, mlp_dim=64)
 
     def forward(self, features):# features are (batch_size, #channels, seq_len)
         seq_len = features.shape[2]

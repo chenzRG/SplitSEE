@@ -64,7 +64,7 @@ def _calc_metrics(pred_labels, true_labels, log_dir, home_path):
     sns.heatmap(cm, annot=True, fmt='g', cmap="Blues")
     plt.xlabel('Predicted labels')
     plt.ylabel('True labels')
-    plt.savefig(os.path.join(home_path, log_dir, "confusion_matrix.png"))
+    plt.savefig(os.path.join(home_path, log_dir, f"{exp_name}_{training_mode}_confusion_matrix.png"))
     plt.close('all')
 
     accuracy = accuracy_score(true_labels, pred_labels)
@@ -78,7 +78,7 @@ def _calc_metrics(pred_labels, true_labels, log_dir, home_path):
         'Value': [accuracy, precision, sensitivity, specificity]
     }
     df = pd.DataFrame(data)
-    df.to_excel(os.path.join(home_path, log_dir, "metrics.xlsx"), index=False, engine='openpyxl')
+    df.to_excel(os.path.join(home_path, log_dir, f"{exp_name}_{training_mode}_metrics.xlsx"), index=False, engine='openpyxl')
     return accuracy, precision, sensitivity, specificity
 
 

@@ -8,9 +8,9 @@ from .augmentations import DataTransform
 
 class Load_Dataset(Dataset):
     # Initialize your data, download, etc.
-    def __init__(self, dataset, config, training_mode):
+    def __init__(self, dataset, config, mode):
         super(Load_Dataset, self).__init__()
-        self.training_mode = training_mode
+        self.training_mode = mode
 
         X_train = dataset["samples"]
         y_train = dataset["labels"]
@@ -29,7 +29,7 @@ class Load_Dataset(Dataset):
             self.y_data = y_train
 
         self.len = X_train.shape[0]
-        if training_mode == "self_supervised":  # no need to apply Augmentations in other modes
+        if mode == "self_supervised":  # no need to apply Augmentations in other modes
             self.aug1, self.aug2 = DataTransform(self.x_data, config)
 
     def __getitem__(self, index):
@@ -42,23 +42,25 @@ class Load_Dataset(Dataset):
         return self.len
 
 
-def data_generator(data_path, configs, training_mode):
+def data_generator(data_path, configs, mode):
 
-    train_dataset = torch.load(os.path.join(data_path, "train.pt"))
-    valid_dataset = torch.load(os.path.join(data_path, "val.pt"))
+    if mode != "test":
+        train_dataset = torch.load(os.path.join(data_path, "train.pt"))
+        valid_dataset = torch.load(os.path.join(data_path, "val.pt"))
+        train_dataset = Load_Dataset(train_dataset, configs, mode)
+        valid_dataset = Load_Dataset(valid_dataset, configs, mode)
+        train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=configs.batch_size,
+                                                shuffle=True, drop_last=configs.drop_last,
+                                                num_workers=0)
+        valid_loader = torch.utils.data.DataLoader(dataset=valid_dataset, batch_size=configs.batch_size,
+                                                shuffle=False, drop_last=configs.drop_last,
+                                                num_workers=0)
+    else:
+        train_loader = None
+        valid_loader = None
+        
     test_dataset = torch.load(os.path.join(data_path, "test.pt"))
-
-    train_dataset = Load_Dataset(train_dataset, configs, training_mode)
-    valid_dataset = Load_Dataset(valid_dataset, configs, training_mode)
-    test_dataset = Load_Dataset(test_dataset, configs, training_mode)
-
-    train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=configs.batch_size,
-                                               shuffle=True, drop_last=configs.drop_last,
-                                               num_workers=0)
-    valid_loader = torch.utils.data.DataLoader(dataset=valid_dataset, batch_size=configs.batch_size,
-                                               shuffle=False, drop_last=configs.drop_last,
-                                               num_workers=0)
-
+    test_dataset = Load_Dataset(test_dataset, configs, mode)
     test_loader = torch.utils.data.DataLoader(dataset=test_dataset, batch_size=configs.batch_size,
                                               shuffle=False, drop_last=False,
                                               num_workers=0)
