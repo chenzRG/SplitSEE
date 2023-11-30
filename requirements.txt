@@ -1,5 +1,4 @@
 torch==2.0.1
-sklearn
 Pandas
 openpyxl
 mat4py
