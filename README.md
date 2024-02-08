@@ -6,18 +6,19 @@ SplitSEE: A Splittable Neural Framework for Single-Channel EEG Representation Le
 <img src="misc/overview.png" width="600" class="center">
 </p>
 
-Recognition of informative characteristics from massive, noisy, redundant electroencephalogram (EEG) data usually requires multi-channel modeling or multi-data analytics. 
-When provided with a single-channel EEG, how can we effectively extract features that alleviate the constraints of data-intensive processes and are suitable for practical applications, such as low-resource target tasks?
-We present SplitSEE, a neural framework tailored for effective Single-channel EEG representation learning. 
+While end-to-end approach to multi-channel electroencephalogram (EEG) learning has shown significant promise, their applicability is often constrained in resource-limited clinical scenarios.
+When provided with a single-channel EEG, how can we effectively capture representative features that are robust to multi-channels and scalable across varied clinical tasks, such as seizure prediction?
 
-The core context of SplitSEE lies in 
-- (1) an unsupervised learning neural network to learn various feature representations in different feature domains without label supervision and 
-- (2) a pre-training-to-fine-tuning strategy with a structurally Splittable design. 
+In this paper, we present SplitSEE, a structurally Splittable framework designed for effective Single-channel EEG representation learning.
+The key concept bihind SplitSEE consists of 
+- (1) three modules for temporal and frequency domain features and alignment,
+- (2) a self-supervised learning framework to learn various feature representations without label supervision, and 
+- (3) a pre-training-to-fine-tuning strategy complemented by a splittable architectural design.
 
 SplitSEE has the following properties: 
-- (a) Generalizability: it can be applicable to various downstream EEG tasks and has even outperformed multi-channel and multi-data source baselines. 
-- (b) Effectiveness: it learns informative representations with the capacity to adapt across different EEG electrodes with low variance. 
-- (c) Scalability: it achieved high performance across different tasks using a few networks. After the initial pre-training, there is a noticeable enhancement in fine-tuning achieved after just one single-step training iteration. 
+- (a) Effectiveness: it learns informative features solely from single-channel EEG but has even outperformed multi-channel and multi-data source baselines.
+- (b) Robustness: it shows the capacity to adapt across different channels with low performance variance. Superior performance is also achieved with our real clinical dataset.
+- (c) Scalability: Our experiments show that with just one fine-tuning epoch, SplitSEE achieves high and stable performance using a few partial model layers.
 
 ## Setup
 
