@@ -6,16 +6,17 @@ SplitSEE: A Splittable Neural Framework for Single-Channel EEG Representation Le
 <img src="misc/overview.png" width="600" class="center">
 </p>
 
-While end-to-end approach to multi-channel electroencephalogram (EEG) learning has shown significant promise, their applicability is often constrained in resource-limited clinical scenarios.
+While end-to-end multi-channel electroencephalogram (EEG) learning approaches have shown significant promise, their applicability is often constrained in neurological diagnostics, such as intracranial EEG resource.
 When provided with a single-channel EEG, how can we effectively capture representative features that are robust to multi-channels and scalable across varied clinical tasks, such as seizure prediction?
 
-In this paper, we present SplitSEE, a structurally Splittable framework designed for effective Single-channel EEG representation learning.
-The key concept bihind SplitSEE consists of 
-- (1) three modules for temporal and frequency domain features and alignment,
-- (2) a self-supervised learning framework to learn various feature representations without label supervision, and 
-- (3) a pre-training-to-fine-tuning strategy complemented by a splittable architectural design.
+In this paper, we present SplitSEE, a structurally splittable framework designed for effective temporal-frequency representation learning in single-channel EEG.
+The key concept of SplitSEE c a self-supervised framework incorporating a deep clustering task. 
+Given an EEG, we argue that the time and frequency domains are two distinct perspectives, and hence, learned representations should share the same cluster assignment.
+To this end, we first propose two domain-specific modules that independently learn domain-specific representation and address the temporal-frequency tradeoff issue in conventional spectrogram-based methods. 
+Then, we introduce a novel clustering loss to measure the information similarity.
+This encourages representations from both domains to coherently describe the same input by assigning them a consistent cluster. 
 
-SplitSEE has the following properties: 
+SplitSEE leverages a pre-training-to-fine-tuning framework within a splittable architecture and has following properties:
 - (a) Effectiveness: it learns informative features solely from single-channel EEG but has even outperformed multi-channel and multi-data source baselines.
 - (b) Robustness: it shows the capacity to adapt across different channels with low performance variance. Superior performance is also achieved with our real clinical dataset.
 - (c) Scalability: Our experiments show that with just one fine-tuning epoch, SplitSEE achieves high and stable performance using a few partial model layers.
