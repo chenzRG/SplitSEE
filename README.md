@@ -9,7 +9,7 @@ SplitSEE: A Splittable Neural Framework for Single-Channel EEG Representation Le
 While end-to-end multi-channel electroencephalogram (EEG) learning approaches have shown significant promise, their applicability is often constrained in neurological diagnostics, such as intracranial EEG resource.
 When provided with a single-channel EEG, how can we effectively capture representative features that are robust to multi-channels and scalable across varied clinical tasks, such as seizure prediction?
 
-In this paper, we present SplitSEE, a structurally splittable framework designed for effective temporal-frequency representation learning in single-channel EEG.
+We present SplitSEE, a structurally splittable framework designed for effective temporal-frequency representation learning in single-channel EEG.
 The key concept of SplitSEE c a self-supervised framework incorporating a deep clustering task. 
 Given an EEG, we argue that the time and frequency domains are two distinct perspectives, and hence, learned representations should share the same cluster assignment.
 To this end, we first propose two domain-specific modules that independently learn domain-specific representation and address the temporal-frequency tradeoff issue in conventional spectrogram-based methods. 
