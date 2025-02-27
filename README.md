@@ -1,5 +1,5 @@
 # SplitSEE
-SplitSEE: A Splittable Neural Framework for Single-Channel EEG Representation Learning
+This is an implementation of ICDM 2024 paper, "SplitSEE: A Splittable Neural Framework for Single-Channel EEG Representation Learning." (https://arxiv.org/abs/2410.11200)
 
 ## Abstract
 <p align="center">
@@ -67,3 +67,19 @@ python main.py --mode test --dataset CHBMIT --channel 0 --device cuda
 ## Result
 
 The experiments are saved in the 'experiments_logs' directory by default (you can change that from args too).
+
+## Citation
+If you find our work useful in your research, please consider citing:
+```
+@misc{kotoge2024splitsee,
+      title={SplitSEE: A Splittable Self-supervised Framework for Single-Channel EEG Representation Learning}, 
+      author={Rikuto Kotoge and Zheng Chen and Tasuku Kimura and Yasuko Matsubara and Takufumi Yanagisawa and Haruhiko Kishima and Yasushi Sakurai},
+      year={2024},
+      eprint={2410.11200},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2410.11200}, 
+}
+
+```
+
